@@ -1,4 +1,4 @@
-For this project to work you need to follow:
+**For this project to work you need to follow:**
 
 composer update
 
@@ -6,7 +6,7 @@ php artisan key:generate
 
 npm install
 
-To start the aplication:
+**To start the aplication:**
 
 php artisan serve
 
