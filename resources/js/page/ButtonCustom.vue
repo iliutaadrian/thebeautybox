@@ -14,7 +14,7 @@
             text: '',
             loading: 0,
             background:{
-                default: '#73879C',
+                default: '#ffffff',
                 type: String
             }
         },
@@ -29,9 +29,9 @@
         border-radius: 11px;
         margin: 10px;
         text-transform: uppercase;
-        color: white;
+        color: black;
         padding: 7px 45px;
-        font-size: 13px;
+        font-size: 17px;
         letter-spacing: 1px;
 
         -webkit-box-shadow: 0px 0px 20px 0px #00000061;
@@ -40,7 +40,7 @@
     }
 
     .btnCustom:hover{
-        background-color: #a5bdd2;
+        background-color: #F3E5DC;
 
         -webkit-box-shadow: 0px 0px 20px 0px #00000096;
         -moz-box-shadow: 0px 0px 20px 0px #00000096;

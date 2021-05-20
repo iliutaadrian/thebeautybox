@@ -32,21 +32,16 @@
                     <i class="fa fa-building passwordIcon"></i>
                 </div>
 
-                <div>
-                    <button class="btn btn-custom" type="submit" v-if="" :disabled="loading == 1" @click="update" v-if="disabled == 0">
-                        <i class="fa fa-spinner fa-spin" style="font-size:18px" v-if="loading"></i> Update Info
-                    </button>
-
-                </div>
+                <ButtonCustom :loading="loading" :text="'Update Info'" @click.native="update" v-if="disabled == 0"></ButtonCustom>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import UserAvatar from './UserAvatar.vue'
-
+    import ButtonCustom from '../page/ButtonCustom';
     export default {
+        components: {ButtonCustom},
         created(){
             axios.get('/api/user/find/'+this.$route.params.id)
                 .then(res=>{
@@ -92,9 +87,6 @@
             currentUser() {
                 return this.$store.getters.currentUser
             }
-        },
-        components:{
-            UserAvatar
         }
     }
 </script>

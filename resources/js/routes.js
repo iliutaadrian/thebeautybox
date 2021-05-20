@@ -2,16 +2,13 @@ import NotFound from './page/NotFound'
 
 import Login from './auth/Login.vue';
 import ChangePassword from './auth/ChangePassword.vue';
-import ChangerTester from './auth/ChangerTester.vue';
 import ForgotPassword from './auth/ForgotPassword.vue';
 import ChangePasswordUser from './auth/ChangePasswordUser.vue';
 import VerifyAccount from './auth/VerifyAccount.vue';
 
 import UserList from './user/UserList.vue';
 import HandleUser from './user/HandleUser.vue';
-import CreateUser from './user/CreateUser.vue';
-
-
+import CreateUser from './user/CreateUser.vue'
 
 import UserProfile from './user/UserProfile.vue';
 import PostView from "./posts/PostView.vue";
@@ -72,7 +69,7 @@ export const routes = [
         path: '/profile/:id',
         component: UserProfile,
         meta:{
-            requiresAuth: false,
+            requiresAuth: true,
             both: true
         }
     },

@@ -8,7 +8,7 @@
 
             <div v-if="posts.length != 0" class="containerClientList">
 
-                <div class="clientCard" v-for="(item, key) in posts" v-if="item.status == 0" :key="item.id">
+                <div class="clientCard" v-for="(item, key) in posts" :key="item.id">
                     <div class="pictureItem">
                         <div class="prev" @click="change_current_picture_prev(item)"></div>
                         <div class="next" @click="change_current_picture_next(item)"></div>

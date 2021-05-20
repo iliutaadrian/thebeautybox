@@ -42,7 +42,7 @@
         data(){
             return {
                 form:{
-                    email: 'mihai@test.ro',
+                    email: 'mihai@email.ro',
                     password: '123456',
                     remember: true
 

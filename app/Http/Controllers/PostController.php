@@ -22,18 +22,16 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|string|max:50',
             'description' => 'required|string|max:100',
-            'size' => 'required|integer',
+            'type' => 'required|string',
             'price' => 'required|integer'
         ]);
 
         $obj = new Post([
             'title' => $request->title,
             'description' => $request->description,
-            'size' => $request->size,
+            'type' => $request->type,
             'picture' => 'public/images/icon.jpeg' ,
-            'price' => $request->price,
-            'user_id' => auth()->id(),
-            'status' => 0
+            'price' => $request->price
         ]);
 
         $obj->save();

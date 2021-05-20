@@ -40,17 +40,11 @@ class AuthController extends Controller
             'password' => bcrypt($request->password),
             'role' => 2,
             'city' => $request->city,
+            'avatar' => '/images/avatar.jpg',
             'activation_token' => str_random(60)
         ]);
 
         $user->save();
-
-//        $avatar = new Avatar();
-//        Storage::put('public/users/'.$user->id.'/avatar.png', $avatar->create($user->name)->getImageObject()->encode('png'));
-
-//        $user->update([
-//            'avatar' => '/storage/users/'.$user->id.'/avatar.png'
-//        ]);
 
 //        $user->notify(new SignupActivate());
 
@@ -113,13 +107,6 @@ class AuthController extends Controller
             'remember_me' => 'boolean'
         ]);
 
-        $userActive = User::where('email', $request->email)->first();
-        if($userActive->active == 0){
-            return response()->json(
-                ['message' => 'Please verify your email address!'], 401
-            );
-        }
-
         $credentials = request(['email', 'password']);
 
         if(!Auth::attempt($credentials))
@@ -127,7 +114,12 @@ class AuthController extends Controller
                 'message' =>'Wrong email or password!'
             ], 401);
 
-        $user = $request->user();
+        $user = User::where('email', $request->email)->first();
+        if($user->active == 0){
+            return response()->json(
+                ['message' => 'Please verify your email address!'], 401
+            );
+        }
 
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;

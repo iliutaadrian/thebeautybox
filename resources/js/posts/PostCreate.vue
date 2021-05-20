@@ -1,42 +1,49 @@
 <template>
-    <div class="postContainer" @keydown.enter="post">
-        <h1 class="postTitle">Create post</h1>
+    <div class="content">
+        <div class="postContainer" @keydown.enter="post">
+            <h1 class="postTitle">Create post</h1>
 
-        <p class="successText" v-if="success !== ''">{{ success }}</p>
+            <p class="successText" v-if="success !== ''">{{ success }}</p>
 
-        <div class="postInputContainer">
-            <p class="errorText" v-if="errors.title !== ''">{{ errors.title }}</p>
-            Title
-            <input type="text" style="margin-top: 10px;" class="form-control postInput" :class="{ 'errorInput' : errors.title !== ''}" v-model="form.title" placeholder="Title">
-        </div>
+            <div class="postInputContainer">
+                <p class="errorText" v-if="errors.title !== ''">{{ errors.title }}</p>
+                Title
+                <input type="text" style="margin-top: 10px;" class="form-control postInput" :class="{ 'errorInput' : errors.title !== ''}" v-model="form.title" placeholder="Title">
+            </div>
 
-        <div class="postInputDescription">
-            <p class="errorText" v-if="errors.description !== ''">{{ errors.description }}</p>
-            Description
-            <input type="text" style="margin-top: 10px;" class="form-control postInput" :class="{ 'errorInput' : errors.description !== ''}" v-model="form.description" placeholder="Description">
-        </div>
+            <div class="postInputContainer">
+                <p class="errorText" v-if="errors.description !== ''">{{ errors.description }}</p>
+                Description
+                <input type="text" style="margin-top: 10px;" class="form-control postInput" :class="{ 'errorInput' : errors.description !== ''}" v-model="form.description" placeholder="Description">
+            </div>
 
-        <div class="postInputContainer">
-            <p class="errorText" v-if="errors.size !== ''">{{ errors.size }}</p>
-            Size
-            <input type="number" style="margin-top: 10px;" class="form-control postInput" :class="{ 'errorInput' : errors.size !== ''}" v-model="form.size" placeholder="Size">
-        </div>
+            <div class="postInputContainer">
+                <p class="errorText" v-if="errors.size !== ''">{{ errors.size }}</p>
+                Type
+                <select name="cars" id="type" class="form-control postInput" style="margin-top: 10px;">
+                    <option value="basic">Basic</option>
+                    <option value="standard">Standard</option>
+                    <option value="premium">Premium</option>
+                </select>
+            </div>
 
-        <div class="Neon Neon-theme-dragdropbox">
-            <input style="z-index: 999; opacity: 0; width: 320px; height: 200px; position: absolute; right: 0px; left: 0px; margin-right: auto; margin-left: auto;" name="files[]" id="filer_input2" multiple="multiple" type="file" :class="{ 'errorInput' : errors.picture !== ''}"  placeholder="picture" ref="myPicture"  @change="setPicture">
-            <div class="Neon-input-dragDrop"><div class="Neon-input-inner"><div class="Neon-input-icon"><i class="fa fa-file-image-o"></i></div><div class="Neon-input-text"><h3>Drag&amp;Drop files here</h3> <span style="display:inline-block; margin: 15px 0">or</span></div><a class="Neon-input-choose-btn blue">Browse Files</a></div></div>
-        </div>
+            <div class="postInputContainer">
+                <p class="errorText" v-if="errors.price !== ''">{{ errors.price }}</p>
+                Price
+                <input type="number" style="margin-top: 10px;" class="form-control postInput" :class="{ 'errorInput' : errors.price !== ''}" v-model="form.price" placeholder="Price">
+            </div>
 
-        <div class="postInputContainer">
-            <p class="errorText" v-if="errors.price !== ''">{{ errors.price }}</p>
-            Price
-            <input type="number" style="margin-top: 10px;" class="form-control postInput" :class="{ 'errorInput' : errors.price !== ''}" v-model="form.price" placeholder="Price">
-        </div>
+            <div class="Neon Neon-theme-dragdropbox">
+                <input style="z-index: 999; opacity: 0; width: 320px; height: 200px; position: absolute; right: 0px; left: 0px; margin-right: auto; margin-left: auto;" name="files[]" id="filer_input2" multiple="multiple" type="file" :class="{ 'errorInput' : errors.picture !== ''}"  placeholder="picture" ref="myPicture"  @change="setPicture">
+                <div class="Neon-input-dragDrop"><div class="Neon-input-inner"><div class="Neon-input-icon"><i class="fa fa-file-image-o"></i></div><div class="Neon-input-text"><h3>Drag&amp;Drop files here</h3> <span style="display:inline-block; margin: 15px 0">or</span></div><a class="Neon-input-choose-btn blue">Browse Files</a></div></div>
+            </div>
 
-        <div>
-            <ButtonCustom :loading="loading" :text="'Create'" @click.native="post"></ButtonCustom>
+            <div>
+                <ButtonCustom :loading="loading" :text="'Create'" @click.native="post"></ButtonCustom>
+            </div>
         </div>
     </div>
+
 </template>
 
 <script>
@@ -47,11 +54,11 @@
         data(){
             return {
                 form: {
-                    title: 'Adidasi',
-                    description: 'Conditie buna , purtati o singura data',
+                    title: 'Mistery Fenty',
+                    description: 'Contine produse de makeup gama Genty',
                     price: 300,
                     picture: '',
-                    size : 45
+                    type : 'premium'
                 },
                 errors:{
                     title: '',
@@ -112,21 +119,27 @@
 </script>
 
 <style lang="scss" scoped>
+    .content{
+        background-image: url('/images/background_2.jpg');
+        background-size: cover;
+        height: 840px;
+        padding-top: 30px;
+    }
+
     .postContainer{
-        color: #73879C;
-        margin: 5% auto 0;
+        color: black;
+        margin: 0 auto;
         padding: 25px 50px 20px;
         text-align: center;
         text-shadow: 0 1px 0 rgba(147, 147, 147, 0.44);
         position: relative;
         width: 60%;
-        background-color: white;
+        background-color: #ffffffb8;
         border-radius: 10px;
-        border: 2px solid #3490dc;
+        border: 1px solid black;
     }
 
     .postTitle{
-        font: 400 25px Helvetica,Arial,sans-serif;
         letter-spacing: -.05em;
         line-height: 20px;
         margin: 10px 0 30px;

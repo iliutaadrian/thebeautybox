@@ -1,52 +1,46 @@
 <template>
-    <div class="container containerList">
+    <div class="content">
+        <div class="container containerList">
+            <spinner-loading :loading="loading" style="width: 100px; height: 100px; margin: 20px auto"></spinner-loading>
+            <div v-if="!loading">
+                <div v-if="posts.length != 0" class="containerClientList" >
 
-        <spinner-loading :loading="loading" style="width: 100px; height: 100px; margin: 20px auto"></spinner-loading>
-        <div v-if="!loading">
-            <div v-if="posts.length != 0" class="containerClientList" >
+                    <div class="clientCard" v-for="(item, key) in posts" :key="item.id">
 
-                <div class="clientCard" v-for="(item, key) in posts" v-if="item.status == 1" :key="item.id">
+                        <div class="pictureItem">
+                            <img :src="item.picture[item.current_picture]" class="clientPicture">
+                        </div>
 
-                    <div class="pictureItem">
-                        <div class="prev" @click="change_current_picture_prev(item)"></div>
-                        <div class="next" @click="change_current_picture_next(item)"></div>
-                        <img :src="item.picture[item.current_picture]" class="clientPicture">
-                    </div>
+                        <div class="titleItem">
+                            {{item.title}}
+                        </div>
 
-                    <div class="titleItem">
-                        {{item.title}}
-                    </div>
+                        <div class="descriptionItem">
+                            {{item.description}}
+                        </div>
 
-                    <div class="descriptionItem">
-                        {{item.description}}
-                    </div>
+                        <div class="typeItem">
+                            Type: <b style="text-transform: uppercase">{{item.type}}</b>
+                        </div>
 
-                    <div class="sizeItem">
-                       Size: {{item.size}}
-                    </div>
+                        <div class="priceItem">
+                            {{item.price}} RON
+                        </div>
 
-                    <div class="priceItem">
-                        {{item.price}} RON
-                    </div>
+                        <div class="gotobtn">
+                            <router-link :to="{path: '/profile/' + item.id}" class="btn btn-custom">Cumpara Acum!</router-link>
+                        </div>
 
-                    <div class="gotobtn">
-                        <router-link :to="{path: '/profile/' + item.user_id}" class="btn btn-custom">Go to user</router-link>
                     </div>
 
                 </div>
-
+                <p v-else class="emptyList"> No elements! </p>
             </div>
-            <p v-else class="emptyList"> No elements! </p>
         </div>
-
-        <dialog-component :title="'Delete'" :body="'Are you sure you want to delete?'" @action="confirmDelete"></dialog-component>
     </div>
 </template>
 
 <script>
-    import Search from '../page/SearchComponent';
-    import DialogComponent from '../page/DialogComponent';
-
     export default {
         data(){
             return{
@@ -70,79 +64,38 @@
                 .catch(err=>{
                     this.loading = 0;
                 })
-        },
-        methods:{
-            change_current_picture_prev(item){
-                let i;
-                for (i = 0; i < this.posts.length; i++) {
-                    if(this.posts[i].id == item.id){
-                        if(this.posts[i].current_picture > 0){
-                            item.current_picture = item.current_picture - 1;
-                            this.$set(this.posts, i, item)
-                        }
-                    }
-                }
-            },
-            change_current_picture_next(item){
-                let i;
-                for (i = 0; i < this.posts.length; i++) {
-                    if(this.posts[i].id == item.id){
-                        if(this.posts[i].picture.length-1 > this.posts[i].current_picture){
-                            item.current_picture = item.current_picture + 1;
-                            this.$set(this.posts, i, item)
-                        }
-                    }
-                }
-            },
-            confirmDelete(item){
-                this.selectedItem = item;
-            },
-            search(word){
-                this.loading=1;
-                axios.get('/api/posts/search', {params : { word : word}})
-                    .then(response => {
-                        this.posts = response.data;
-                        let i = 0;
-                        for (i = 0; i < this.posts.length; i++) {
-                            this.posts[i].picture = this.posts[i].picture.split(';');
-                            this.posts[i].current_picture = 0;
-                        }
-                        this.loading = 0;
-                    })
-                    .catch(err =>
-                        this.loading = 0
-                    )
-            }
-        },
-        components:{Search, DialogComponent}
+        }
     }
 </script>
 
 <style scoped>
-    .prev{
-        width: 100px;
-        cursor: pointer;
-        height: 75%;
-        position: absolute;
+    .content{
+        background-image: url('/images/background_2.jpg');
+        background-size: cover;
+        height: 840px;
+        padding-top: 30px;
     }
-    .next{
-        width: 100px;
-        cursor: pointer;
-        height: 75%;
-        position: absolute;
-        left: 190px;
-    }
+
     .btn-custom{
-        color: #e1e8ef;
-        background-color: #5DBCD2;
-        border-color: #9aa5ad;
-        border-radius: 7px;
+        color: #000;
+        background-color: #F3E5DC;
+
+        border: none;
+        border-radius: 45px;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-custom:hover {
+        background-color: #fff;
+
+        box-shadow: 0px 15px 20px rgb(202 193 189);
     }
 
     .containerList{
         margin-top: 30px;
         text-align: center;
         text-shadow: 0 1px 0 rgba(147, 147, 147, 0.44);
+        opacity: 1;
     }
 
     .emptyList{
@@ -154,6 +107,8 @@
     .containerClientList{
         margin: 0;
         padding: 0;
+        display: flex;
+        flex-wrap: wrap;
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
         outline: none;
@@ -190,12 +145,12 @@
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
         -webkit-transition: 0.3s;
         transition: 0.3s;
-        max-width: 90%;
-        min-width: 90%;
+        min-width: 48%;
+        background-color: white;
         padding: 20px;
         margin: 10px;
         position: relative;
-        height: 265px;
+        height: 300px;
     }
 
     .clientCard:hover {
@@ -204,34 +159,34 @@
 
     .clientPicture{
         vertical-align: middle;
-        border-style: none;
-        height: 200px;
+        height: 250px;
         float: left;
         border: 1px solid black;
     }
 
     .titleItem {
-        font-size: 22px;
+        font-size: 30px;
         font-weight: bolder;
         margin-bottom: 15px;
     }
 
     .descriptionItem {
         font-style: italic;
-        font-size: 19px;
+        font-size: 15px;
         margin-bottom: 10px;
         overflow-x: hidden;
+    }
 
+    .typeItem{
+        margin: 10px 0px 20px 0px;
     }
 
     .priceItem {
         font-size: 27px;
-        color: #5DBCD2;
+        color: #F3E5DC;
         font-weight: bolder;
+        -webkit-text-stroke: 1px black;
+        margin-bottom: 10px;
     }
-    .gotobtn{
-        float: right;
-    }
-
 
 </style>
