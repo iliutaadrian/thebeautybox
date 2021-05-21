@@ -1,5 +1,6 @@
 <template>
-    <div class="loginContainer" @keydown.enter="login">
+    <div class="content">
+        <div class="loginContainer" @keydown.enter="login">
         <h1 class="loginTitle">Login</h1>
 
         <p class="errorText" v-if="error !== ''">{{ error }}</p>
@@ -29,7 +30,12 @@
             <p class="change_link">Lost your password?
                 <router-link to="/forgot">Reset it</router-link>
             </p>
+
+            <p class="change_link">New User?
+                <router-link to="/register">Register</router-link>
+            </p>
         </div>
+    </div>
     </div>
 </template>
 
@@ -83,14 +89,25 @@
 </script>
 
 <style lang="scss" scoped>
+    .content{
+        background-image: url('/images/background_3.jpg');
+        background-size: cover;
+        height: 840px;
+        padding-top: 30px;
+    }
+
     .loginContainer{
         color: #73879C;
         margin: 5% auto 0;
-        max-width: 350px;
-        padding: 25px 0 0;
+        padding: 25px 50px 20px;
+        max-width: 400px;
         text-align: center;
         text-shadow: 0 1px 0 rgba(147, 147, 147, 0.44);
         position: relative;
+
+        background-color: #ffffffb8;
+        border-radius: 10px;
+        border: 1px solid black;
     }
 
     .loginTitle{

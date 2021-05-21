@@ -28,7 +28,7 @@
                         </div>
 
                         <div class="gotobtn">
-                            <router-link :to="{path: '/profile/' + item.id}" class="btn btn-custom">Cumpara Acum!</router-link>
+                            <button class="btn btn-custom" @click="order_create(item)" >Cumpara Acum!</button>
                         </div>
 
                     </div>
@@ -49,6 +49,11 @@
                 loading: 0
             }
         },
+        computed: {
+            currentUser() {
+                return this.$store.getters.currentUser
+            }
+        },
         mounted(){
             this.loading = 1;
             axios.get('/api/posts/get')
@@ -64,6 +69,22 @@
                 .catch(err=>{
                     this.loading = 0;
                 })
+        },
+        methods:{
+            order_create(item){
+                if (this.currentUser == null){
+                    this.$router.push('/login');
+                    return
+                }
+                axios.post('/api/order/create', {user_id: this.$store.getters.currentUser.id, product_id: item.id})
+                    .then(res => {
+                        this.$router.push('/order/list');
+                    })
+                    .catch(err => {
+
+                    })
+
+            }
         }
     }
 </script>

@@ -18,9 +18,10 @@
             </div>
 
             <div class="postInputContainer">
-                <p class="errorText" v-if="errors.size !== ''">{{ errors.size }}</p>
+                <p class="errorText" v-if="errors.type !== ''">{{ errors.type }}</p>
                 Type
-                <select name="cars" id="type" class="form-control postInput" style="margin-top: 10px;">
+                <select v-model="form.type" class="form-control postInput" style="margin-top: 10px;">
+                    <option disabled value="">Please select one</option>
                     <option value="basic">Basic</option>
                     <option value="standard">Standard</option>
                     <option value="premium">Premium</option>
@@ -140,6 +141,7 @@
     }
 
     .postTitle{
+        font: 400 25px Helvetica,Arial,sans-serif;
         letter-spacing: -.05em;
         line-height: 20px;
         margin: 10px 0 30px;

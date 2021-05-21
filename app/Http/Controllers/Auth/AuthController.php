@@ -46,7 +46,7 @@ class AuthController extends Controller
 
         $user->save();
 
-//        $user->notify(new SignupActivate());
+        $user->notify(new SignupActivate());
 
         return response()->json([
             'message' => __('auth.signup_success')

@@ -32,6 +32,16 @@ Route::group([
 
 Route::group([
     'middleware' => 'auth:api',
+    'prefix' => 'order'
+], function () {
+    Route::get('get', 'OrderController@get');
+    Route::post('/create', 'OrderController@create');
+    Route::delete('delete/{id}', 'OrderController@delete');
+    Route::put('status/{id}', 'OrderController@status');
+});
+
+Route::group([
+    'middleware' => 'auth:api',
     'prefix' => 'posts'
 ], function () {
     Route::post('/create', 'PostController@create');

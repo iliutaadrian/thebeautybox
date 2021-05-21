@@ -11,7 +11,7 @@
                     <router-link :to="{path: '/shop'}" class="nav-link" >SHOP</router-link>
                 </li>
                 <li class="nav-item" v-if="currentUser!=null">
-                    <router-link :to="{path: '/post/create'}" class="nav-link" v-if="currentUser.role == 1">Add post</router-link>
+                    <router-link :to="{path: '/post/create'}" class="nav-link" v-if="currentUser.role == 1">Add Product</router-link>
                 </li>
                 <li class="nav-item " v-if="currentUser==null ">
                     <router-link :to="{path: '/login'}" class="nav-link">Login</router-link>
@@ -25,13 +25,19 @@
                         <img :src="currentUser.avatar" class="avatarHeader">
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink"  v-if="currentUser.role == 2">
+
                         <router-link :to="{path: '/profile/' + currentUser.id}" class="dropdown-item">Profile</router-link>
+
+                        <router-link :to="{path: '/order/list' }" class="dropdown-item">Orders</router-link>
+
                         <a class="dropdown-item" @click="logout" style="cursor: pointer">Logout</a>
                     </div>
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" v-if="currentUser.role == 1">
 
                         <router-link :to="{path: '/profile/' + currentUser.id}" class="dropdown-item" >Profile</router-link>
+
+                        <router-link :to="{path: '/order/list' }" class="dropdown-item">Orders</router-link>
 
                         <router-link :to="{path: '/user/list'}" class="dropdown-item" >Users List</router-link>
 

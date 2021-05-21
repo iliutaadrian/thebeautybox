@@ -1,5 +1,5 @@
 <template>
-    <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal fade" :id="id_modal" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -12,7 +12,7 @@
                     <p>{{body}}</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" @click="action" data-dismiss="modal">Delete</button>
+                    <button type="button" class="btn btn-danger" @click="action" data-dismiss="modal">{{title}}</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -24,7 +24,8 @@
     export default {
         props:{
             title: String,
-            body: String
+            body: String,
+            id_modal: String
         },
         methods:{
             action(){

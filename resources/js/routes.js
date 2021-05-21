@@ -13,7 +13,8 @@ import CreateUser from './user/CreateUser.vue'
 import UserProfile from './user/UserProfile.vue';
 import PostView from "./posts/PostView.vue";
 import PostCreate from "./posts/PostCreate.vue";
-import AdminPosts from  "./posts/AdminPosts";
+
+import OrderList from './order/OrderList';
 
 import Home from './Home';
 
@@ -47,6 +48,14 @@ export const routes = [
         meta:{
             requiresAuth: true,
             role: 'admin'
+        }
+    },
+    {
+        path: '/order/list',
+        component: OrderList,
+        meta:{
+            requiresAuth: true,
+            both: true
         }
     },
     {
@@ -95,14 +104,6 @@ export const routes = [
         meta:{
             requiresAuth: true,
             role: 'user'
-        }
-    },
-    {
-        path: '/pendingposts',
-        component: AdminPosts,
-        meta:{
-            requiresAuth: true,
-            role: 'admin'
         }
     },
     {

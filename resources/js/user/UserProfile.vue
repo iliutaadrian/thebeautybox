@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="content">
         <spinner-loading :loading="loading" style="width: 100px; height: 100px; margin: 20px auto"></spinner-loading>
         <div v-if="!loading">
             <div class="loginContainer">
@@ -92,6 +92,13 @@
 </script>
 
 <style lang="scss" scoped>
+    .content{
+        background-image: url('/images/background_2.jpg');
+        background-size: cover;
+        height: 900px;
+        padding-top: 30px;
+    }
+
     .btn-custom{
         color: #e1e8ef;
         background-color: #5DBCD2;
@@ -112,18 +119,17 @@
     }
 
     .loginContainer{
-        margin: 60px auto 10px;
-        max-width: 460px;
+        color: #73879C;
+        margin: 20px auto 20px;
+        padding: 25px 50px 20px;
+        max-width: 400px;
         text-align: center;
         text-shadow: 0 1px 0 rgba(147, 147, 147, 0.44);
         position: relative;
-        background-color: white;
-        height: 762px;
-        padding: 25px 30px 25px;
-        border-radius: 13px;
-        -webkit-box-shadow: 0 0 3px 0 black;
-        box-shadow: 0 0 3px 0 black;
-        color: #2FA0CB;
+
+        background-color: #ffffffb8;
+        border-radius: 10px;
+        border: 1px solid black;
     }
 
     .loginTitle {

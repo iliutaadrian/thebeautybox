@@ -41,10 +41,11 @@ class SignupActivated extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Welcome to Colorize!')
-                    ->line('You have completed your registration! Your account is now active.')
-                    ->line('You can log in now and use the application')
-                    ->action('Log in', url('/login'));
+            ->from('licenta@iliutaadrian.website', 'TheBeautyBox')
+            ->subject('Welcome to TheBeautyBox!')
+            ->line('You have completed your registration! Your account is now active.')
+            ->line('You can log in now and use the application')
+            ->action('Log in', url('/login'));
     }
 
     /**

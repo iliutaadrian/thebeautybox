@@ -1,45 +1,43 @@
 <template>
-    <div class="registerContainer" @keydown.enter="register">
-        <h1 class="registerTitle">Create account</h1>
+    <div class="content">
+        <div class="registerContainer" @keydown.enter="register">
+            <h1 class="registerTitle">Create account</h1>
 
-        <p class="successText" v-if="success !== ''">{{ success }}</p>
+            <p class="successText" v-if="success !== ''">{{ success }}</p>
 
-        <div class="registerInputContainer">
-            <p class="errorText" v-if="errors.name !== ''">{{ errors.name }}</p>
-            <input type="text" class="form-control registerInput" :class="{ 'errorInput' : errors.name !== ''}" v-model="form.name" placeholder="Nume">
-        </div>
+            <div class="registerInputContainer">
+                <p class="errorText" v-if="errors.name !== ''">{{ errors.name }}</p>
+                <input type="text" class="form-control registerInput" :class="{ 'errorInput' : errors.name !== ''}" v-model="form.name" placeholder="Nume">
+            </div>
 
-        <div class="registerInputContainer">
-            <p class="errorText" v-if="errors.email !== ''">{{ errors.email }}</p>
-            <input type="email" class="form-control registerInput" :class="{ 'errorInput' : errors.email !== ''}" v-model="form.email" placeholder="Email">
-        </div>
+            <div class="registerInputContainer">
+                <p class="errorText" v-if="errors.email !== ''">{{ errors.email }}</p>
+                <input type="email" class="form-control registerInput" :class="{ 'errorInput' : errors.email !== ''}" v-model="form.email" placeholder="Email">
+            </div>
 
-        <div class="registerInputContainer">
-            <p class="errorText" v-if="errors.password !== ''">{{ errors.password }}</p>
-            <input type="password" class="form-control registerInput" :class="{ 'errorInput' : errors.password !== ''}" v-model="form.password" placeholder="Password">
-        </div>
+            <div class="registerInputContainer">
+                <p class="errorText" v-if="errors.password !== ''">{{ errors.password }}</p>
+                <input type="password" class="form-control registerInput" :class="{ 'errorInput' : errors.password !== ''}" v-model="form.password" placeholder="Password">
+            </div>
 
-        <div class="registerInputContainer">
-            <p class="errorText" v-if="errors.password_confirmation !== ''">{{ errors.password_confirmation }}</p>
-            <input type="password" class="form-control registerInput" :class="{ 'errorInput' : errors.password_confirmation !== ''}" v-model="form.password_confirmation" placeholder="Password Confirmation">
-        </div>
+            <div class="registerInputContainer">
+                <p class="errorText" v-if="errors.password_confirmation !== ''">{{ errors.password_confirmation }}</p>
+                <input type="password" class="form-control registerInput" :class="{ 'errorInput' : errors.password_confirmation !== ''}" v-model="form.password_confirmation" placeholder="Password Confirmation">
+            </div>
 
-        <div class="registerInputContainer">
-            <p class="errorText" v-if="errors.phone !== ''">{{ errors.phone }}</p>
-            <input type="text" class="form-control registerInput" :class="{ 'errorInput' : errors.phone !== ''}" v-model="form.phone" placeholder="Phone">
-        </div>
+            <div class="registerInputContainer">
+                <p class="errorText" v-if="errors.phone !== ''">{{ errors.phone }}</p>
+                <input type="text" class="form-control registerInput" :class="{ 'errorInput' : errors.phone !== ''}" v-model="form.phone" placeholder="Phone">
+            </div>
 
-        <div class="registerInputContainer">
-            <p class="errorText" v-if="errors.city !== ''">{{ errors.city }}</p>
-            <input type="text" class="form-control registerInput" :class="{ 'errorInput' : errors.city !== ''}" v-model="form.city" placeholder="City">
-        </div>
+            <div class="registerInputContainer">
+                <p class="errorText" v-if="errors.city !== ''">{{ errors.city }}</p>
+                <input type="text" class="form-control registerInput" :class="{ 'errorInput' : errors.city !== ''}" v-model="form.city" placeholder="City">
+            </div>
 
-        <div>
-            <ButtonCustom :loading="loading" :text="'Create'" @click.native="register"></ButtonCustom>
-        </div>
-
-        <div>
-            <router-link to="/" class="btn btn-info"><i class="fa fa-arrow-left"></i> Back</router-link>
+            <div>
+                <ButtonCustom :loading="loading" :text="'Create'" @click.native="register"></ButtonCustom>
+            </div>
         </div>
     </div>
 </template>
@@ -117,14 +115,25 @@
 </script>
 
 <style lang="scss" scoped>
+    .content{
+        background-image: url('/images/background_3.jpg');
+        background-size: cover;
+        height: 840px;
+        padding-top: 30px;
+    }
+
     .registerContainer{
-        color: #73879C;
+        color: black;
         margin: 5% auto 0;
-        max-width: 350px;
-        padding: 25px 0 0;
+        padding: 25px 50px 20px;
+        max-width: 450px;
         text-align: center;
         text-shadow: 0 1px 0 rgba(147, 147, 147, 0.44);
         position: relative;
+
+        background-color: #ffffffb8;
+        border-radius: 10px;
+        border: 1px solid black;
     }
 
     .registerTitle{

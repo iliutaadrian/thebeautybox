@@ -8,4 +8,6 @@ npm-debug.log
 yarn-error.log
 /.idea
 /public/storage
+composer.lock
+package-lock.json
 

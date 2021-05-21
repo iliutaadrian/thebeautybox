@@ -10,36 +10,49 @@
                 <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
                     <th scope="col">Avatar</th>
+                    <th scope="col">Name</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Role</th>
                     <th scope="col">Active</th>
                     <th scope="col">Handle</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="(item, index) in users">
-                    <th scope="row">{{index+1}}</th>
+                    <td scope="row">{{index+1}}</td>
                     <td><img :src="item.avatar" class="avatarUser"></td>
                     <td>{{item.name}}</td>
                     <td>{{item.email}}</td>
+                    <td>{{item.phone}}</td>
+                    <td>{{item.city}}</td>
+                    <td>{{item.role == 1 ? 'Admin' : 'User'}}</td>
                     <td><i class="fa fa-circle" :style="[ item.active == 1 ? {'font-size' : '20px', 'color':'green'} : {'font-size' : '20px', 'color': 'red'}]"></i></td>
-                    <td><button v-if="item.active == 1" class="btn btn-danger" value="Activate" @click="desactivate(index, item)" >DezActivate</button></td>
+                    <td>
+                        <button class="btn btnHandle" @click="confirm_modal(item)" data-toggle="modal" data-target="#modal_confirm" v-if="item.active == 0 && item.role == 2">✅</button>
+                        <button class="btn btnHandle" @click="confirm_modal(item)" data-toggle="modal" data-target="#modal_delete"v-if="item.role == 2">❎</button>
+                    </td>
                 </tr>
                 </tbody>
             </table>
         </div>
+        <dialog-component :title="'Confirm'" :body="'Are you sure you want to activate this user?'" :id_modal="'modal_confirm'" @action="confirm_user"></dialog-component>
+        <dialog-component :title="'Delete'" :body="'Are you sure you want to delete this user?'" :id_modal="'modal_delete'" @action="delete_user"></dialog-component>
     </div>
 </template>
 
 <script>
     import SpinnerLoading from '../page/SpinnerLoading';
-    import pagination from '../page/PaginationCustom';
+    import DialogComponent from '../page/DialogComponent';
+
 
     export default {
         data(){
             return{
                 users: [],
+                selected_user: '',
                 loading: 0
             }
         },
@@ -56,13 +69,24 @@
                 })
         },
         methods:{
-            desactivate(index, item){
-                item.active = 0;
-                this.$set(this.users, index, item)
+            confirm_modal(item){
+                this.selected_user = item;
+            },
+            delete_user(item){
+                axios.delete('/api/user/delete/'+this.selected_user.id)
+                    .then(
+                        this.users.splice(this.users.indexOf(this.selected_user),1)
+                    );
+            },
+            confirm_user(item){
+                axios.put('/api/user/status/'+this.selected_user.id, {status: 1})
+                    .then(
+                        this.selected_user.status = 1
+                    );
             }
         },
         components:{
-            SpinnerLoading
+            SpinnerLoading, DialogComponent
         }
     }
 </script>
@@ -74,17 +98,6 @@
         text-shadow: 0 1px 0 rgba(147, 147, 147, 0.44);
     }
 
-    .buttonCustom{
-        margin: 10px;
-        float: right;
-    }
-
-    .btnRound{
-        font-size: 29px;
-        border-radius: 50%;
-        line-height: 36px;
-    }
-
     table th{
         text-align: center;
         font-size: 18px;
@@ -92,6 +105,11 @@
 
     table td{
         font-size: 17px;
+        vertical-align: middle !important;
+    }
+
+    .btnHandle{
+        font-size: 20px;
     }
 
     .avatarUser{

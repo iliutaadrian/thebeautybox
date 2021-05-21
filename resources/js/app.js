@@ -11,7 +11,6 @@ import 'material-icons/iconfont/material-icons.css';
 import BootstrapVue from 'bootstrap-vue';
 
 //custom components
-import PaginationComponent from './page/PaginationCustom';
 import SpinnerLoading from './page/SpinnerLoading';
 
 import Vuex from 'vuex';
@@ -26,7 +25,6 @@ Vue.use(BootstrapVue);
 import VueCarousel from 'vue-carousel';
 Vue.use(VueCarousel);
 
-Vue.component('pagination', PaginationComponent);
 Vue.component('spinner-loading', SpinnerLoading);
 
 const store = new Vuex.Store(StoreData);
