@@ -171,7 +171,7 @@
         padding: 20px;
         margin: 10px;
         position: relative;
-        height: 300px;
+        height: 350px;
     }
 
     .clientCard:hover {
@@ -182,7 +182,7 @@
         vertical-align: middle;
         height: 250px;
         float: left;
-        border: 1px solid black;
+        border: 5px solid #F3E5DC;
     }
 
     .titleItem {
@@ -207,7 +207,7 @@
         color: #F3E5DC;
         font-weight: bolder;
         -webkit-text-stroke: 1px black;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
     }
 
 </style>
