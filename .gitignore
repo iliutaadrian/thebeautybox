@@ -10,4 +10,7 @@ yarn-error.log
 /public/storage
 composer.lock
 package-lock.json
+.env
+/public/js/app.js
+
 
